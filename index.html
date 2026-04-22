@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Wellness Maison Beauté — Salon de beauté à Agen | Épilation, cils, ongles</title>
+  <meta name="description" content="Salon de beauté haut de gamme à Agen (47000). Épilation laser, extensions de cils, microblading, prothésie ongulaire. Réservez en ligne sur Planity." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wellness Maison Beauté — Salon de beauté à Agen" />
+  <meta property="og:description" content="Une expérience beauté unique et privatisée à Agen. Épilation, cils, ongles, pigmentation par trois expertes passionnées." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80" />
+  <meta property="og:url" content="https://wellness-maison-beaute.fr" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nude:        '#E6D5C3',
+            dore:        '#B4975A',
+            'dore-dark': '#8f7340',
+            creme:       '#FAF7F2',
+            anthracite:  '#2B2B2B',
+          },
+          fontFamily: {
+            playfair: ['"Playfair Display"', 'Georgia', 'serif'],
+            inter:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Données structurées JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "name": "Wellness Maison Beauté",
+    "description": "Salon de beauté haut de gamme à Agen proposant épilation laser, extensions de cils, microblading, pigmentation et prothésie ongulaire.",
+    "url": "https://wellness-maison-beaute.fr",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Agen",
+      "postalCode": "47000",
+      "addressCountry": "FR"
+    },
+    "hasMap": "https://www.planity.com/wellness-maison-beaute-47000-agen",
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pigmentation Sourcils & Lèvres" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Browlift & Teinture" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Épilation visage & corps" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Épilation définitive Laser" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Beauté des ongles" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Extensions & rehaussement de cils" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Blanchiment dentaire" } }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background-color: #FAF7F2; color: #2B2B2B; overflow-x: hidden; }
+
+    /* ── Animations reveal (IntersectionObserver) ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .reveal.visible        { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1        { transition-delay: 0.1s; }
+    .reveal-delay-2        { transition-delay: 0.2s; }
+    .reveal-delay-3        { transition-delay: 0.3s; }
+
+    /* ── Header scroll ── */
+    #site-header {
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+    }
+    #site-header.scrolled {
+      background-color: rgba(250,247,242,0.93);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 24px rgba(43,43,43,0.09);
+    }
+
+    /* ── Burger : 3 lignes (icône statique, la fermeture se fait via le × du drawer) ── */
+    .burger-line {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: #2B2B2B;
+      border-radius: 2px;
+    }
+
+    /* ── Drawer mobile (z-[60] > header z-50 pour couvrir le logo) ── */
+    #mobile-menu {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 100%;          /* plein écran sur mobile */
+      max-width: 340px;     /* limité sur grand téléphone */
+      background: #FAF7F2;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94);
+      box-shadow: -8px 0 40px rgba(43,43,43,0.15);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #mobile-menu.open { transform: translateX(0); }
+
+    /* Lien nav mobile : underline animée */
+    .mobile-nav-link {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    .mobile-nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: #B4975A;
+      transition: width 0.3s ease;
+    }
+    .mobile-nav-link:hover::after,
+    .mobile-nav-link:focus::after { width: 100%; }
+
+    /* ── Overlay menu ── */
+    #menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(43,43,43,0.45);
+      z-index: 30;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    #menu-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ── Scroll indicator ── */
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(10px); }
+    }
+    .scroll-indicator { animation: scrollBounce 2.2s ease-in-out infinite; }
+
+    /* ── Cartes prestations ── */
+    .card-prestation {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-prestation:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 36px rgba(180,151,90,0.18);
+    }
+    .card-prestation:hover .card-title { color: #B4975A; }
+
+    /* ── Ligne dorée sous titres ── */
+    .titre-ligne::after {
+      content: '';
+      display: block;
+      width: 48px; height: 2px;
+      background: #B4975A;
+      margin-top: 14px;
+    }
+
+    /* ── Image overlay hero ── */
+    .hero-overlay {
+      background: linear-gradient(
+        150deg,
+        rgba(43,43,43,0.60) 0%,
+        rgba(43,43,43,0.28) 55%,
+        rgba(180,151,90,0.12) 100%
+      );
+    }
+
+    /* ── Focus visible ── */
+    *:focus-visible {
+      outline: 2px solid #B4975A;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ── Empêcher le scroll body quand menu ouvert ── */
+    body.menu-open { overflow: hidden; }
+  </style>
+</head>
+
+<body class="antialiased">
+
+<!-- ============================================================
+     HEADER FIXE
+     ============================================================ -->
+<header id="site-header" role="banner" aria-label="En-tête du site"
+        class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-8 lg:px-12">
+
+  <div class="max-w-7xl mx-auto flex items-center justify-between py-3 sm:py-4">
+
+    <!-- Logo -->
+    <a href="#accueil" aria-label="Wellness Maison Beauté — retour en haut"
+       class="flex-shrink-0 group">
+      <svg viewBox="0 0 160 52" width="130" height="42" aria-hidden="true"
+           xmlns="http://www.w3.org/2000/svg"
+           class="sm:w-[150px] sm:h-[48px] transition-opacity duration-300 group-hover:opacity-75">
+        <text x="80" y="22" text-anchor="middle"
+              font-family="'Playfair Display', Georgia, serif"
+              font-size="21" font-weight="700" letter-spacing="6"
+              fill="#2B2B2B">WELLNESS</text>
+        <line x1="4" y1="38" x2="32" y2="38" stroke="#B4975A" stroke-width="1"/>
+        <text x="80" y="41" text-anchor="middle"
+              font-family="'Inter', system-ui, sans-serif"
+              font-size="8.5" font-weight="400" letter-spacing="1.5"
+              fill="#2B2B2B">MAISON BEAUTÉ</text>
+        <line x1="128" y1="38" x2="156" y2="38" stroke="#B4975A" stroke-width="1"/>
+      </svg>
+    </a>
+
+    <!-- Navigation desktop (lg+) -->
+    <nav role="navigation" aria-label="Navigation principale"
+         class="hidden lg:flex items-center gap-7 xl:gap-9">
+      <a href="#accueil"     class="font-inter text-sm font-medium text-anthracite hover:text-dore transition-colors duration-200 tracking-wide">Accueil</a>
+      <a href="#prestations" class="font-inter text-sm font-medium text-anthracite hover:text-dore transition-colors duration-200 tracking-wide">Prestations</a>
+      <a href="#equipe"      class="font-inter text-sm font-medium text-anthracite hover:text-dore transition-colors duration-200 tracking-wide">Équipe</a>
+      <a href="#infos"       class="font-inter text-sm font-medium text-anthracite hover:text-dore transition-colors duration-200 tracking-wide">Infos</a>
+      <a href="#contact"     class="font-inter text-sm font-medium text-anthracite hover:text-dore transition-colors duration-200 tracking-wide">Contact</a>
+    </nav>
+
+    <!-- CTA desktop + burger -->
+    <div class="flex items-center gap-3 sm:gap-4">
+
+      <!-- Bouton RDV desktop -->
+      <a href="https://www.planity.com/wellness-maison-beaute-47000-agen"
+         target="_blank" rel="noopener noreferrer"
+         class="hidden lg:inline-flex items-center gap-2 bg-dore hover:bg-dore-dark text-white text-sm font-medium tracking-wide px-5 py-2.5 transition-colors duration-200"
+         aria-label="Prendre rendez-vous sur Planity (nouvel onglet)">
+        Prendre rendez-vous
+      </a>
+
+      <!-- Bouton burger — visible jusqu'à lg -->
+      <button id="burger-btn" type="button"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              aria-label="Ouvrir le menu"
+              class="lg:hidden relative flex flex-col justify-center items-center gap-[5px] w-11 h-11 rounded-sm -mr-1 focus-visible:outline-2">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Overlay (clic extérieur ferme le menu) ── -->
+<div id="menu-overlay" aria-hidden="true"></div>
+
+<!-- ============================================================
+     DRAWER MOBILE
+     ============================================================ -->
+<div id="mobile-menu"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Menu de navigation">
+
+  <!-- En-tête du drawer -->
+  <div class="flex items-center justify-between px-6 pt-5 pb-4 border-b border-nude/60">
+
+    <!-- Logo dans le drawer -->
+    <a href="#accueil" class="mobile-nav-link" aria-label="Accueil">
+      <svg viewBox="0 0 160 52" width="120" height="38" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <text x="80" y="22" text-anchor="middle"
+              font-family="'Playfair Display', Georgia, serif"
+              font-size="21" font-weight="700" letter-spacing="6" fill="#2B2B2B">WELLNESS</text>
+        <line x1="4" y1="38" x2="32" y2="38" stroke="#B4975A" stroke-width="1"/>
+        <text x="80" y="41" text-anchor="middle"
+              font-family="'Inter', system-ui, sans-serif"
+              font-size="8.5" font-weight="400" letter-spacing="1.5" fill="#2B2B2B">MAISON BEAUTÉ</text>
+        <line x1="128" y1="38" x2="156" y2="38" stroke="#B4975A" stroke-width="1"/>
+      </svg>
+    </a>
+
+    <!-- Bouton fermeture × -->
+    <button id="close-menu-btn" type="button"
+            aria-label="Fermer le menu"
+            class="w-10 h-10 flex items-center justify-center text-anthracite hover:text-dore transition-colors duration-200">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="20" y1="2" x2="2"  y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Liens de navigation -->
+  <nav class="flex flex-col px-6 pt-6 pb-4 gap-1" aria-label="Navigation mobile">
+
+    <a href="#accueil"
+       class="mobile-nav-link font-playfair text-2xl text-anthracite hover:text-dore transition-colors duration-200 py-3 border-b border-nude/40">
+      Accueil
+    </a>
+    <a href="#prestations"
+       class="mobile-nav-link font-playfair text-2xl text-anthracite hover:text-dore transition-colors duration-200 py-3 border-b border-nude/40">
+      Prestations
+    </a>
+    <a href="#equipe"
+       class="mobile-nav-link font-playfair text-2xl text-anthracite hover:text-dore transition-colors duration-200 py-3 border-b border-nude/40">
+      Équipe
+    </a>
+    <a href="#infos"
+       class="mobile-nav-link font-playfair text-2xl text-anthracite hover:text-dore transition-colors duration-200 py-3 border-b border-nude/40">
+      Infos pratiques
+    </a>
+    <a href="#contact"
+       class="mobile-nav-link font-playfair text-2xl text-anthracite hover:text-dore transition-colors duration-200 py-3">
+      Contact
+    </a>
+
+  </nav>
+
+  <!-- CTA plein-largeur en bas -->
+  <div class="mt-auto px-6 pb-8 pt-4">
+    <a href="https://www.planity.com/wellness-maison-beaute-47000-agen"
+       target="_blank" rel="noopener noreferrer"
+       class="block w-full text-center bg-dore hover:bg-dore-dark text-white font-inter font-medium tracking-wider py-4 text-sm transition-colors duration-200">
+      Prendre rendez-vous
+    </a>
+    <p class="font-inter text-xs text-anthracite/40 text-center mt-4">
+      Réservation via Planity
+    </p>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 1 — HERO (plein écran)
+     ============================================================ -->
+<section id="accueil" aria-label="Accueil"
+         class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  <img src="WellnessMB.webp"
+       alt="Soin beauté haut de gamme en salon"
+       loading="eager"
+       class="absolute inset-0 w-full h-full object-cover object-center" />
+
+  <div class="hero-overlay absolute inset-0"></div>
+
+  <div class="relative z-10 text-center text-white px-5 sm:px-8 max-w-4xl mx-auto pt-20 sm:pt-24">
+
+    <p class="reveal font-inter text-xs sm:text-sm tracking-[0.3em] uppercase text-nude/80 mb-5 sm:mb-6">
+      Salon de beauté — Agen
+    </p>
+
+    <h1 class="reveal reveal-delay-1 font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal leading-tight mb-5 sm:mb-6">
+      Votre parenthèse<br /><em class="italic">beauté à Agen</em>
+    </h1>
+
+    <p class="reveal reveal-delay-2 font-inter text-base sm:text-lg md:text-xl text-white/85 font-light max-w-xl mx-auto mb-8 sm:mb-10">
+      Une expérience unique et privatisée,<br class="hidden sm:block" />
+      par trois expertes passionnées.
+    </p>
+
+    <!-- CTA : plein-largeur sur mobile, auto sur sm+ -->
+    <div class="reveal reveal-delay-3 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
+      <a href="https://www.planity.com/wellness-maison-beaute-47000-agen"
+         target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center justify-center gap-2 bg-dore hover:bg-dore-dark text-white font-inter font-medium tracking-wide px-7 py-4 text-sm transition-colors duration-200">
+        Réserver en ligne
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#prestations"
+         class="inline-flex items-center justify-center gap-2 border border-white/60 hover:border-white text-white font-inter font-medium tracking-wide px-7 py-4 text-sm transition-colors duration-200 hover:bg-white/10">
+        Découvrir nos prestations
+      </a>
+    </div>
+  </div>
+
+  <!-- Indicateur scroll -->
+  <div class="scroll-indicator absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" aria-hidden="true">
+    <span class="font-inter text-xs tracking-[0.25em] text-white/55 uppercase">Scroll</span>
+    <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+      <rect x="1" y="1" width="18" height="26" rx="9" stroke="white" stroke-opacity="0.45" stroke-width="1.2"/>
+      <rect x="9" y="5" width="2" height="6" rx="1" fill="white" fill-opacity="0.65"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2 — À PROPOS
+     ============================================================ -->
+<section id="a-propos" aria-labelledby="titre-apropos"
+         class="py-14 md:py-20 lg:py-28 bg-creme">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 lg:px-12">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+
+      <!-- Image (passe en 1er sur mobile, 2e sur desktop) -->
+      <div class="reveal order-1 lg:order-1 relative">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80"
+             alt="Ambiance chaleureuse du salon Wellness Maison Beauté à Agen"
+             loading="lazy"
+             class="w-full h-60 sm:h-72 md:h-80 lg:h-[520px] object-cover object-center" />
+        <div class="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-16 sm:w-24 h-16 sm:h-24 border border-dore/35 -z-10" aria-hidden="true"></div>
+        <div class="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-12 sm:w-16 h-12 sm:h-16 border border-nude -z-10"            aria-hidden="true"></div>
+      </div>
+
+      <!-- Texte -->
+      <div class="reveal reveal-delay-1 order-2 lg:order-2">
+        <p class="font-inter text-xs tracking-[0.3em] uppercase text-dore mb-3 sm:mb-4">La Maison</p>
+        <h2 id="titre-apropos"
+            class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-normal text-anthracite leading-snug mb-2 titre-ligne">
+          Une maison,<br /><em class="italic">trois expertes</em>
+        </h2>
+        <p class="font-inter text-sm sm:text-base text-anthracite/75 leading-relaxed mt-6 sm:mt-8 mb-5 sm:mb-8">
+          Notre maison de beauté vous propose une expérience unique sur Agen. Elle se compose de trois prestataires qualifiées dans leur domaine. Maëva, Nawel &amp; Mélanie vous accueillent pour un moment privatisé selon vos envies et vos besoins.
+        </p>
+        <p class="font-inter text-sm sm:text-base text-anthracite/75 leading-relaxed mb-8 sm:mb-10">
+          Ici, chaque soin est pensé comme un rituel. Dans un cadre doux et intimiste, loin de l'agitation du quotidien, vous êtes entre de bonnes mains — des mains expertes qui prennent soin de chaque détail.
+        </p>
+        <a href="#prestations"
+           class="inline-flex items-center gap-3 font-inter text-sm font-medium text-dore hover:text-dore-dark tracking-wide border-b border-dore/30 hover:border-dore pb-0.5 transition-colors duration-200">
+          Voir nos prestations
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3 — PRESTATIONS
+     ============================================================ -->
+<section id="prestations" aria-labelledby="titre-prestations"
+         class="py-14 md:py-20 lg:py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 lg:px-12">
+
+    <!-- En-tête -->
+    <div class="reveal text-center mb-10 sm:mb-14">
+      <p class="font-inter text-xs tracking-[0.3em] uppercase text-dore mb-3">Ce que nous faisons</p>
+      <h2 id="titre-prestations"
+          class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-normal text-anthracite mb-3">
+        Nos prestations
+      </h2>
+      <p class="font-inter text-sm sm:text-base italic text-anthracite/55">L'excellence au service de votre beauté</p>
+      <div class="w-12 h-px bg-dore mx-auto mt-5"></div>
+    </div>
+
+    <!-- Grille 7 cartes -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+
+      <!-- Carte 1 -->
+      <article class="card-prestation reveal reveal-delay-1 bg-creme overflow-hidden group cursor-default">
+        <div class="overflow-hidden h-48 sm:h-52">
+          <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=400&q=80"
+               alt="Pigmentation semi-permanente des sourcils et des lèvres"
+               loading="lazy"
+               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-5 sm:p-6">
+          <h3 class="card-title font-playfair text-base sm:text-lg font-semibold text-anthracite mb-2 transition-colors duration-200">
+            Pigmentation Sourcils &amp; Lèvres
+          </h3>
+          <p class="font-inter text-sm text-anthracite/65 leading-relaxed">
+            Maquillage semi-permanent pour un résultat naturel et durable qui magnifie votre regard.
+          </p>
+          <div class="mt-4 w-8 h-px bg-dore/50 group-hover:w-14 group-hover:bg-dore transition-all duration-300"></div>
+        </div>
+      </article>
+
+      <!-- Carte 2 -->
+      <article class="card-prestation reveal reveal-delay-2 bg-creme overflow-hidden group cursor-default">
+        <div class="overflow-hidden h-48 sm:h-52">
+          <img src="https://images.unsplash.com/photo-1597586124394-fbd6ef244026?w=400&q=80"
+               alt="Browlift et teinture des sourcils"
+               loading="lazy"
+               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-5 sm:p-6">
+          <h3 class="card-title font-playfair text-base sm:text-lg font-semibold text-anthracite mb-2 transition-colors duration-200">
+            Browlift &amp; Teinture
+          </h3>
+          <p class="font-inter text-sm text-anthracite/65 leading-relaxed">
+            Sourcils restructurés, regard sublimé. Un traitement qui redéfinit et intensifie naturellement votre regard.
+          </p>
+          <div class="mt-4 w-8 h-px bg-dore/50 group-hover:w-14 group-hover:bg-dore transition-all duration-300"></div>
+        </div>
+      </article>
+
+      <!-- Carte 3 -->
+      <article class="card-prestation reveal reveal-delay-3 bg-creme overflow-hidden group cursor-default">
+        <div class="overflow-hidden h-48 sm:h-52">
+          <img src="https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=400&q=80"
+               alt="Épilation visage et corps à la cire et au sucre"
+               loading="lazy"
+               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-5 sm:p-6">
+          <h3 class="card-title font-playfair text-base sm:text-lg font-semibold text-anthracite mb-2 transition-colors duration-200">
+            Épilations visage &amp; corps
+          </h3>
+          <p class="font-inter text-sm text-anthracite/65 leading-relaxed">
+            Techniques cire et sucre pour une peau douce et nette, respectant les peaux les plus sensibles.
+          </p>
+          <div class="mt-4 w-8 h-px bg-dore/50 group-hover:w-14 group-hover:bg-dore transition-all duration-300"></div>
+        </div>
+      </article>
+
+      <!-- Carte 4 -->
+      <article class="card-prestation reveal reveal-delay-1 bg-creme overflow-hidden group cursor-default">
+        <div class="overflow-hidden h-48 sm:h-52">
+          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&q=80"
+               alt="Épilation définitive au laser dernière génération"
+               loading="lazy"
+               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-5 sm:p-6">
+          <h3 class="card-title font-playfair text-base sm:text-lg font-semibold text-anthracite mb-2 transition-colors duration-200">
+            Épilation définitive Laser
+          </h3>
+          <p class="font-inter text-sm text-anthracite/65 leading-relaxed">
+            Technologie dernière génération pour une épilation durable et efficace sur tous les types de peau.
+          </p>
+          <div class="mt-4 w-8 h-px bg-dore/50 group-hover:w-14 group-hover:bg-dore transition-all duration-300"></div>
+        </div>
+      </article>
+
+      <!-- Carte 5 -->
+      <article class="card-prestation reveal reveal-delay-2 bg-creme overflow-hidden group cursor-default">
+        <div class="overflow-hidden h-48 sm:h-52">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80"
+               alt="Soin beauté des mains et des pieds, manucure et pédicure"
+               loading="lazy"
+               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-5 sm:p-6">
+          <h3 class="card-title font-playfair text-base sm:text-lg font-semibold text-anthracite mb-2 transition-colors duration-200">
+            Beauté des ongles, mains &amp; pieds
+          </h3>
+          <p class="font-inter text-sm text-anthracite/65 leading-relaxed">
+            Manucure, pédicure, pose gel et semi-permanent pour des mains et des pieds impeccables.
+          </p>
+          <div class="mt-4 w-8 h-px bg-dore/50 group-hover:w-14 group-hover:bg-dore transition-all duration-300"></div>
+        </div>
+      </article>
+
+      <!-- Carte 6 -->
+      <article class="card-prestation reveal reveal-delay-3 bg-creme overflow-hidden group cursor-default">
+        <div class="overflow-hidden h-48 sm:h-52">
+          <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&q=80"
+               alt="Extensions et rehaussement de cils, volume russe et lifting"
+               loading="lazy"
+               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-5 sm:p-6">
+          <h3 class="card-title font-playfair text-base sm:text-lg font-semibold text-anthracite mb-2 transition-colors duration-200">
+            Extensions &amp; rehaussement de cils
+          </h3>
+          <p class="font-inter text-sm text-anthracite/65 leading-relaxed">
+            Cil à cil, volume russe, lifting. Un regard intense et expressif, sans effort au quotidien.
+          </p>
+          <div class="mt-4 w-8 h-px bg-dore/50 group-hover:w-14 group-hover:bg-dore transition-all duration-300"></div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="reveal text-center mt-10 sm:mt-14">
+      <a href="https://www.planity.com/wellness-maison-beaute-47000-agen"
+         target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center gap-2 bg-dore hover:bg-dore-dark text-white font-inter font-medium tracking-wide px-7 sm:px-8 py-4 text-sm transition-colors duration-200">
+        Réserver ma prestation
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4 — ÉQUIPE
+     ============================================================ -->
+<section id="equipe" aria-labelledby="titre-equipe"
+         class="py-14 md:py-20 lg:py-28 bg-creme">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 lg:px-12">
+
+    <div class="reveal text-center mb-10 sm:mb-16">
+      <p class="font-inter text-xs tracking-[0.3em] uppercase text-dore mb-3">Qui sommes-nous</p>
+      <h2 id="titre-equipe"
+          class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-normal text-anthracite">
+        Rencontrez <em class="italic">l'équipe</em>
+      </h2>
+      <div class="w-12 h-px bg-dore mx-auto mt-5"></div>
+    </div>
+
+    <!-- 3 cartes : 1 col mobile, 3 col md+ -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 lg:gap-14">
+
+      <!-- Maëva -->
+      <div class="reveal reveal-delay-1 text-center">
+        <div class="relative inline-block mb-5 sm:mb-6">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=300&q=80"
+               alt="Portrait de Maëva, experte sourcils et pigmentation"
+               loading="lazy"
+               class="w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full object-cover object-top mx-auto border-4 border-white shadow-lg" />
+          <div class="absolute -bottom-2 -right-2 w-9 h-9 sm:w-10 sm:h-10 bg-dore rounded-full flex items-center justify-center" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5" fill="white"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="font-playfair text-xl sm:text-2xl font-semibold text-anthracite mb-1">Maëva</h3>
+        <p class="font-inter text-xs tracking-[0.2em] uppercase text-dore mb-4">Experte sourcils &amp; pigmentation</p>
+        <p class="font-inter text-sm text-anthracite/65 leading-relaxed max-w-xs mx-auto">
+          Passionnée par l'art du maquillage permanent depuis plus de 8 ans, Maëva met son expertise au service de votre regard. Sa précision et son sens esthétique garantissent un résultat naturel qui vous ressemble.
+        </p>
+      </div>
+
+      <!-- Nawel -->
+      <div class="reveal reveal-delay-2 text-center">
+        <div class="relative inline-block mb-5 sm:mb-6">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=80"
+               alt="Portrait de Nawel, spécialiste cils et extensions"
+               loading="lazy"
+               class="w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full object-cover object-top mx-auto border-4 border-white shadow-lg" />
+          <div class="absolute -bottom-2 -right-2 w-9 h-9 sm:w-10 sm:h-10 bg-dore rounded-full flex items-center justify-center" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3" fill="white"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="font-playfair text-xl sm:text-2xl font-semibold text-anthracite mb-1">Nawel</h3>
+        <p class="font-inter text-xs tracking-[0.2em] uppercase text-dore mb-4">Spécialiste cils &amp; extensions</p>
+        <p class="font-inter text-sm text-anthracite/65 leading-relaxed max-w-xs mx-auto">
+          Spécialiste des cils depuis 6 ans, Nawel sublime chaque regard avec délicatesse et précision. Son objectif : révéler votre beauté naturelle tout en vous faisant gagner un temps précieux chaque matin.
+        </p>
+      </div>
+
+      <!-- Mélanie -->
+      <div class="reveal reveal-delay-3 text-center">
+        <div class="relative inline-block mb-5 sm:mb-6">
+          <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&q=80"
+               alt="Portrait de Mélanie, prothésiste ongulaire et bien-être"
+               loading="lazy"
+               class="w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full object-cover object-top mx-auto border-4 border-white shadow-lg" />
+          <div class="absolute -bottom-2 -right-2 w-9 h-9 sm:w-10 sm:h-10 bg-dore rounded-full flex items-center justify-center" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="font-playfair text-xl sm:text-2xl font-semibold text-anthracite mb-1">Mélanie</h3>
+        <p class="font-inter text-xs tracking-[0.2em] uppercase text-dore mb-4">Prothésiste ongulaire &amp; bien-être</p>
+        <p class="font-inter text-sm text-anthracite/65 leading-relaxed max-w-xs mx-auto">
+          Mélanie transforme le soin des mains et des pieds en véritable rituel de bien-être. Avec 5 ans d'expérience, elle vous propose des prestations soignées dans une atmosphère douce et apaisante.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5 — INFOS PRATIQUES
+     ============================================================ -->
+<section id="infos" aria-labelledby="titre-infos"
+         class="py-14 md:py-20 lg:py-28" style="background-color: #E6D5C3;">
+  <div class="max-w-3xl mx-auto px-5 sm:px-6 md:px-8">
+
+    <div class="reveal text-center mb-8 sm:mb-12">
+      <p class="font-inter text-xs tracking-[0.3em] uppercase text-dore mb-3">À savoir</p>
+      <h2 id="titre-infos"
+          class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-normal text-anthracite">
+        Informations <em class="italic">importantes</em>
+      </h2>
+      <div class="w-12 h-px bg-dore/60 mx-auto mt-5"></div>
+    </div>
+
+    <div class="reveal bg-white/60 backdrop-blur-sm px-5 py-8 sm:px-8 sm:py-10 md:px-12 md:py-14">
+      <ul class="space-y-6" role="list">
+
+        <!-- Ponctualité -->
+        <li class="flex items-start gap-4 sm:gap-5">
+          <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-dore/15 rounded-full flex items-center justify-center mt-0.5" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B4975A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-inter text-sm font-semibold text-anthracite mb-1">Ponctualité</p>
+            <p class="font-inter text-sm text-anthracite/70 leading-relaxed">
+              Pour le bon déroulement des rendez-vous, les retards au-delà de <strong>15 minutes</strong> ne sont malheureusement pas acceptés.
+            </p>
+          </div>
+        </li>
+
+        <li aria-hidden="true"><div class="w-full h-px bg-dore/20"></div></li>
+
+        <!-- Paiement -->
+        <li class="flex items-start gap-4 sm:gap-5">
+          <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-dore/15 rounded-full flex items-center justify-center mt-0.5" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B4975A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+              <line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-inter text-sm font-semibold text-anthracite mb-2">Moyens de paiement acceptés</p>
+            <div class="flex flex-wrap gap-2 sm:gap-3">
+              <span class="inline-flex items-center gap-1.5 font-inter text-sm text-anthracite/70">
+                <span class="w-2 h-2 rounded-full bg-dore/60 flex-shrink-0"></span> PayPal
+              </span>
+              <span class="inline-flex items-center gap-1.5 font-inter text-sm text-anthracite/70">
+                <span class="w-2 h-2 rounded-full bg-dore/60 flex-shrink-0"></span> Espèces
+              </span>
+              <span class="inline-flex items-center gap-1.5 font-inter text-sm text-anthracite/70">
+                <span class="w-2 h-2 rounded-full bg-dore/60 flex-shrink-0"></span> Carte bancaire (CB)
+              </span>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+
+      <p class="font-playfair text-base italic text-anthracite/65 mt-8 sm:mt-10 text-center border-t border-dore/20 pt-6 sm:pt-8">
+        "Merci de votre compréhension. Hâte de vous recevoir. — L'équipe Wellness"
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6 — CONTACT
+     ============================================================ -->
+<section id="contact" aria-labelledby="titre-contact"
+         class="py-14 md:py-20 lg:py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-8 lg:px-12">
+
+    <div class="reveal text-center mb-10 sm:mb-14">
+      <p class="font-inter text-xs tracking-[0.3em] uppercase text-dore mb-3">Venez nous voir</p>
+      <h2 id="titre-contact"
+          class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-normal text-anthracite">
+        Nous <em class="italic">trouver</em>
+      </h2>
+      <div class="w-12 h-px bg-dore mx-auto mt-5"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+      <!-- Infos pratiques -->
+      <div class="reveal space-y-6 sm:space-y-8">
+
+        <!-- Adresse -->
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-nude/60 flex items-center justify-center" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B4975A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-inter text-xs tracking-widest uppercase text-dore mb-1">Adresse</p>
+            <address class="font-inter text-sm text-anthracite/75 not-italic leading-relaxed">
+              Wellness Maison Beauté<br />
+              Agen, 47000<br />
+              Lot-et-Garonne, France
+            </address>
+          </div>
+        </div>
+
+        <!-- Téléphone -->
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-nude/60 flex items-center justify-center" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B4975A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17.42z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-inter text-xs tracking-widest uppercase text-dore mb-1">Téléphone</p>
+            <p class="font-inter text-sm text-anthracite/75">Sur rendez-vous via Planity</p>
+          </div>
+        </div>
+
+        <!-- Horaires -->
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-nude/60 flex items-center justify-center" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B4975A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="w-full">
+            <p class="font-inter text-xs tracking-widest uppercase text-dore mb-2">Horaires</p>
+            <dl class="font-inter text-sm text-anthracite/75 space-y-1">
+              <div class="flex justify-between max-w-[220px]">
+                <dt>Lundi</dt>     <dd>09:00 – 20:00</dd>
+              </div>
+              <div class="flex justify-between max-w-[220px]">
+                <dt>Mardi</dt>     <dd>09:00 – 20:00</dd>
+              </div>
+              <div class="flex justify-between max-w-[220px]">
+                <dt>Mercredi</dt>  <dd>09:00 – 20:00</dd>
+              </div>
+              <div class="flex justify-between max-w-[220px]">
+                <dt>Jeudi</dt>     <dd>09:00 – 20:00</dd>
+              </div>
+              <div class="flex justify-between max-w-[220px]">
+                <dt>Vendredi</dt>  <dd>09:00 – 20:00</dd>
+              </div>
+              <div class="flex justify-between max-w-[220px]">
+                <dt>Samedi</dt>    <dd>08:00 – 17:00</dd>
+              </div>
+              <div class="flex justify-between max-w-[220px] text-anthracite/45">
+                <dt>Dimanche</dt>  <dd>Fermé</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- Réseaux sociaux -->
+        <div class="flex items-center gap-3 sm:gap-4 pt-1">
+          <a href="#" aria-label="Instagram de Wellness Maison Beauté"
+             class="w-10 h-10 border border-dore/40 hover:border-dore hover:bg-nude/40 flex items-center justify-center transition-colors duration-200">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4975A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook de Wellness Maison Beauté"
+             class="w-10 h-10 border border-dore/40 hover:border-dore hover:bg-nude/40 flex items-center justify-center transition-colors duration-200">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4975A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <span class="font-inter text-xs text-anthracite/45 ml-1">Retrouvez-nous sur les réseaux</span>
+        </div>
+
+        <!-- CTA Planity -->
+        <a href="https://www.planity.com/wellness-maison-beaute-47000-agen"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex w-full sm:w-auto items-center justify-center gap-3 bg-dore hover:bg-dore-dark text-white font-inter font-medium tracking-wide px-7 py-4 text-sm transition-colors duration-200">
+          Prendre rendez-vous sur Planity
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+      </div>
+
+      <!-- Google Maps -->
+      <div class="reveal reveal-delay-2">
+        <div class="w-full h-56 sm:h-72 lg:h-[420px] overflow-hidden shadow-md">
+          <iframe
+            title="Localisation du salon Wellness Maison Beauté à Agen"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46143.69776869338!2d0.5791736!3d44.2004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aac9e882c52eb7%3A0x40665174813b970!2sAgen%2C%2047000!5e0!3m2!1sfr!2sfr!4v1700000000000"
+            width="100%" height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="Carte Google Maps centrée sur Agen (47000)">
+          </iframe>
+        </div>
+        <p class="font-inter text-xs text-anthracite/45 mt-3 italic">
+          L'adresse exacte du salon vous sera communiquée lors de la confirmation de votre rendez-vous.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer role="contentinfo" class="bg-anthracite text-white py-12 sm:py-16 px-5 sm:px-6 md:px-8 lg:px-12">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 lg:gap-16 pb-10 sm:pb-12 border-b border-white/10">
+
+      <!-- Logo + baseline -->
+      <div class="sm:col-span-2 md:col-span-1">
+        <a href="#accueil" aria-label="Wellness Maison Beauté — retour en haut">
+          <svg viewBox="0 0 160 52" width="130" height="42" aria-hidden="true"
+               xmlns="http://www.w3.org/2000/svg" class="mb-4">
+            <text x="80" y="22" text-anchor="middle"
+                  font-family="'Playfair Display', Georgia, serif"
+                  font-size="21" font-weight="700" letter-spacing="6" fill="#FAF7F2">WELLNESS</text>
+            <line x1="4" y1="38" x2="32" y2="38" stroke="#B4975A" stroke-width="1"/>
+            <text x="80" y="41" text-anchor="middle"
+                  font-family="'Inter', system-ui, sans-serif"
+                  font-size="8.5" font-weight="400" letter-spacing="1.5" fill="#E6D5C3">MAISON BEAUTÉ</text>
+            <line x1="128" y1="38" x2="156" y2="38" stroke="#B4975A" stroke-width="1"/>
+          </svg>
+        </a>
+        <p class="font-inter text-sm text-white/50 leading-relaxed max-w-xs">
+          Salon de beauté haut de gamme à Agen (47000). Une expérience unique et privatisée.
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <nav aria-label="Liens du footer">
+        <p class="font-inter text-xs tracking-[0.25em] uppercase text-dore mb-4 sm:mb-5">Navigation</p>
+        <ul class="space-y-2.5 sm:space-y-3">
+          <li><a href="#accueil"     class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">Accueil</a></li>
+          <li><a href="#prestations" class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">Prestations</a></li>
+          <li><a href="#equipe"      class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">Équipe</a></li>
+          <li><a href="#infos"       class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">Informations</a></li>
+          <li><a href="#contact"     class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Légal -->
+      <nav aria-label="Liens légaux">
+        <p class="font-inter text-xs tracking-[0.25em] uppercase text-dore mb-4 sm:mb-5">Légal</p>
+        <ul class="space-y-2.5 sm:space-y-3">
+          <li><a href="#" class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">Mentions légales</a></li>
+          <li><a href="#" class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">Politique de confidentialité</a></li>
+          <li><a href="#" class="font-inter text-sm text-white/55 hover:text-white transition-colors duration-200">CGV</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <!-- Bas footer -->
+    <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-center sm:text-left">
+      <p class="font-inter text-xs text-white/30">
+        &copy; 2026 Wellness Maison Beauté — Agen, France
+      </p>
+      <!-- Mots-clés SEO local -->
+      <p class="font-inter text-xs text-white/20 leading-relaxed sm:text-right">
+        Épilation Agen &middot; Prothésiste ongulaire Agen &middot; Extension de cils Agen &middot; Microblading Agen &middot; Réhaussement de cils Agen
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+  /* ── Sélecteurs ── */
+  const header        = document.getElementById('site-header');
+  const burgerBtn     = document.getElementById('burger-btn');
+  const closeMenuBtn  = document.getElementById('close-menu-btn');
+  const mobileMenu    = document.getElementById('mobile-menu');
+  const menuOverlay   = document.getElementById('menu-overlay');
+  const mobileLinks   = mobileMenu.querySelectorAll('a[href^="#"]');
+
+  /* ── Ouvrir / fermer le drawer ── */
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    menuOverlay.classList.add('visible');
+    burgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+    /* Focus sur le bouton × du drawer pour l'accessibilité */
+    closeMenuBtn.focus();
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    menuOverlay.classList.remove('visible');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+    burgerBtn.focus();
+  }
+
+  burgerBtn.addEventListener('click',    () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+  closeMenuBtn.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click',  closeMenu);
+
+  /* Fermer via un lien de navigation */
+  mobileLinks.forEach(link => link.addEventListener('click', () => setTimeout(closeMenu, 80)));
+
+  /* Fermer avec Echap */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+  });
+
+  /* Piège de focus dans le drawer (accessibilité) */
+  mobileMenu.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const focusable = mobileMenu.querySelectorAll('a, button');
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+
+  /* ── Header scroll ── */
+  function handleHeaderScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  }
+  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+  handleHeaderScroll();
+
+
+  /* ── Smooth scroll compensé par la hauteur du header ── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const offset = target.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 8;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    });
+  });
+
+
+  /* ── IntersectionObserver : fade-in au scroll ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.10, rootMargin: '0px 0px -36px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+  /* ── Hero : déclencher les animations immédiatement (dans le viewport au chargement) ── */
+  window.addEventListener('load', () => {
+    document.querySelectorAll('#accueil .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 160);
+    });
+  });
+</script>
+
+</body>
+</html>
